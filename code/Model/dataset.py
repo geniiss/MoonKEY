@@ -27,6 +27,9 @@ submision_activities_marks["datesubmitted"] = pd.to_datetime(submision_activitie
 submision_activities_marks["dategraded"] = pd.to_datetime(submision_activities_marks['dategraded'], unit='s')
 submision_activities_marks["startdate"] = pd.to_datetime(submision_activities_marks['startdate'], unit='s')
 submision_activities_marks["duedate"] = pd.to_datetime(submision_activities_marks['duedate'], unit='s')
+submision_activities_marks['rank_P'] = submision_activities_marks.groupby('aula_id')['P_Grade'].rank(method='dense', ascending=False)
+submision_activities_marks['rank_F'] = submision_activities_marks.groupby('aula_id')['F_Grade'].rank(method='dense', ascending=False)
+submision_activities_marks['rank_R'] = submision_activities_marks.groupby('aula_id')['R_Grade'].rank(method='dense', ascending=False)
 
 dataset = submision_activities_marks[["userid", "aula_id", "activitat_id", "activitat", "startdate", "duedate", "datesubmitted", "dategraded", "attempt_number", "mark", "NOT_Presented_P", "P_Grade", "P_Grade_Date", "NOT_Presented_F", "F_Grade", "F_Grade_Date", "NOT_Presented_R", "R_Grade", "R_Grade_Date"]]
 
