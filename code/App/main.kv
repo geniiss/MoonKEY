@@ -6,7 +6,7 @@ MDScreen:
         HomeScreen:
         RankingScreen:
         StatisticsScreen:
-        ReinforcementActivitiesScreen:
+        TrainingActivitiesScreen:
 
     # El BoxLayout principal amb la barra superior
     MDBoxLayout:
@@ -26,6 +26,7 @@ MDScreen:
     MDNavigationDrawer:
         id: nav_drawer
         elevation: 0
+        size_hint_x: 0.80
 
         MDBoxLayout:
             orientation: "vertical"
@@ -63,9 +64,9 @@ MDScreen:
                         icon: "chart-line"
 
                 OneLineAvatarListItem:
-                    text: "Reinforcement Activities"
+                    text: "Training Activities"
                     on_release:
-                        app.menu_callback("reinforcement_activities")
+                        app.menu_callback("training_activities")
                     IconLeftWidget:
                         icon: "arm-flex"
             
