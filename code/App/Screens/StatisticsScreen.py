@@ -6,24 +6,30 @@ import sys
 import os
 import matplotlib.pyplot as plt
 from kivymd.uix.list import OneLineListItem
+from kivymd.uix.datatables import MDDataTable
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from Screens.SubjectScreen import SubjectScreen
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'Model')))
 from pie_chart import pie_chart
+from Statistic_Tables import Academic_Record, stats_submitions
 
 Builder.load_file("kv_files/StatisticsScreen.kv")
 
+user_id = 789
+
 # Llista de codis d'assignatures
-llista_assigs = [12, 13, 14, 15]
+academic_record = Academic_Record(user_id)
+# Ex: academic_record = [['aula_id', 'Nota_Final', 'Fecha_Final'], [12, '7.5', '2024-06-10']]
 
 class StatisticsScreen(Screen):
     def on_enter(self, *args):
         # Establim els valors de les mitjanes directament des del codi
-        self.ids.final_grade_avg.text = "6.3"
+        # stats = stats_submitions(user_id)
+        self.ids.final_grade_avg.text = "6.3"  # Actualitza el valor del label de final_grade_avg
         self.ids.activity_grade_avg.text = "8.3"
 
         # Generem el gràfic amb la funció pie_chart
-        plt_figure = pie_chart(155)
+        plt_figure = pie_chart(user_id)
         self.update_chart(plt_figure)
 
         # Afegim els codis d'assignatures a la llista scrollejable
@@ -48,11 +54,19 @@ class StatisticsScreen(Screen):
         self.ids.chart_box.add_widget(img)
     
     def populate_subjects_list(self):
-        # Afegim els elements de la llista d'assignatures
-        for code in llista_assigs:
-            item = OneLineListItem(text=f"Subject Code: {code}")
-            item.bind(on_release=lambda x, code=code: self.open_subject_screen(code))
+    # Itera sobre cada asignatura en academic_record
+        self.ids.subjects_list.clear_widgets()
+        for i in range(3):
+            aula_id = academic_record['aula_id'].values[i]
+            nota_final = academic_record['Nota_Final'].values[i]
+            fecha_final = academic_record['Fecha_Final'].values[i]
+            # [aula_id, nota_final, fecha_final] = subject
+            # Crea un elemento de lista con el aula_id como texto y añade la función para abrir la pantalla correspondiente
+            item = OneLineListItem(text=f"Aula ID: {aula_id} - Nota: {nota_final}", 
+                                    on_release=lambda x, aula_id=aula_id: self.open_subject_screen(aula_id))
+            # Añade el item a la lista de subjects_list en el archivo kv
             self.ids.subjects_list.add_widget(item)
+
 
     def open_subject_screen(self, code):
         # Obre una nova pantalla per a l'assignatura seleccionada
@@ -60,3 +74,4 @@ class StatisticsScreen(Screen):
         subject_screen.subject_code = str(code)
         self.manager.add_widget(subject_screen)
         self.manager.current = subject_screen.name
+

@@ -54,9 +54,17 @@
                     size_hint_x: 0.7
                     padding: dp(10)
         
+        # Títol per a la llista d'assignatures (opcional)
+        MDLabel:
+            text: "Llista d'Assignatures"
+            halign: "center"
+            font_style: "H5"
+            size_hint_y: None
+            height: dp(40)
+
         # Llista scrollable d'assignatures a sota
         ScrollView:
             size_hint_y: None
             height: dp(375)
             MDList:
-                id: subjects_list  # ID per accedir a la llista des del codi Python 
+                id: subjects_list  # ID per accedir a la llista des del codi Python

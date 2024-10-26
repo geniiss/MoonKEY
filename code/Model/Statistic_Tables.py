@@ -1,3 +1,10 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+
+
+
 def Academic_Record(user_id):
     activities = pd.read_csv("./../../data/activitats.csv", encoding='ISO-8859-1')
     marks = pd.read_csv("./../../data/notes.csv", delimiter=';')
