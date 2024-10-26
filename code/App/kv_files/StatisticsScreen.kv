@@ -7,6 +7,11 @@
             title: "Statistics"
             left_action_items: [["menu", lambda x: app.root.ids.nav_drawer.set_state("toggle")]]
         
+        # Espaciador para evitar que el contenido se solape con la sombra de la barra de herramientas
+        Widget:
+            size_hint_y: None
+            height: "10dp"  # Ajusta la altura según el tamaño de la sombra
+        
         ScrollView:
             MDBoxLayout:
                 orientation: 'vertical'
