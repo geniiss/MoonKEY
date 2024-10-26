@@ -6,7 +6,6 @@ MDScreen:
         HomeScreen:
         RankingScreen:
         StatisticsScreen:
-        PredictionsScreen:
         ReinforcementActivitiesScreen:
 
     # El BoxLayout principal amb la barra superior
@@ -60,12 +59,6 @@ MDScreen:
                     font_name: "NotoEmoji"  # Usa la fuente con soporte de emojis
                     on_release:
                         app.menu_callback("statistics")
-                OneLineListItem:
-                    text: "Predictions"
-                    font_size: "24sp"
-                    font_name: "NotoEmoji"  # Usa la fuente con soporte de emojis
-                    on_release:
-                        app.menu_callback("predictions")
                 OneLineListItem:
                     text: "💪 Reinforcement Activities"
                     font_size: "24sp"
