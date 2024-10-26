@@ -3,16 +3,13 @@
     MDBoxLayout:
         orientation: 'vertical'
         
-        # Eliminem el MDTopAppBar si ja està definit a nivell superior
-        
         AnchorLayout:
-            anchor_y: 'top'  # Forcem que el contingut estigui a la part superior
+            anchor_y: 'top'
             
             MDBoxLayout:
-                padding: dp(50)
                 orientation: 'horizontal'
                 size_hint_y: None
-                height: dp(250)  # Ajusta aquesta alçada segons el que necessitis
+                height: dp(250)
 
                 # Columna esquerra per a les labels de números
                 MDBoxLayout:
@@ -29,7 +26,7 @@
                     
                     MDLabel:
                         id: final_grade_avg
-                        text: "0.0"  # Valor inicial que actualitzarem des del codi Python
+                        text: "0.0"
                         halign: "center"
                         font_style: "H6"
                         size_hint_y: None
@@ -44,7 +41,7 @@
                     
                     MDLabel:
                         id: activity_grade_avg
-                        text: "0.0"  # Valor inicial que actualitzarem des del codi Python
+                        text: "0.0"
                         halign: "center"
                         font_style: "H6"
                         size_hint_y: None
@@ -56,3 +53,10 @@
                     orientation: 'vertical'
                     size_hint_x: 0.7
                     padding: dp(10)
+        
+        # Llista scrollable d'assignatures a sota
+        ScrollView:
+            size_hint_y: None
+            height: dp(375)
+            MDList:
+                id: subjects_list  # ID per accedir a la llista des del codi Python 

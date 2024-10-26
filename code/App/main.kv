@@ -6,7 +6,6 @@ MDScreen:
         HomeScreen:
         RankingScreen:
         StatisticsScreen:
-        PredictionsScreen:
         ReinforcementActivitiesScreen:
 
     # El BoxLayout principal amb la barra superior
@@ -37,45 +36,41 @@ MDScreen:
             Image:
                 source: '../../image/logo/text_moonkey.png'
                 size_hint_y: 0.2
-                # height: "100dp"  # Ajusta la altura según sea necesario
-                allow_stretch: True  # Para que la imagen se ajuste al tamaño
+                allow_stretch: True
 
             MDList:
                 size_hint_y: 0.7
-                OneLineListItem:
-                    text: "🏠 Home"
-                    font_size: "60sp"
-                    font_name: "NotoEmoji"  # Usa la fuente con soporte de emojis
+
+                OneLineAvatarListItem:
+                    text: "Home"
                     on_release:
                         app.menu_callback("home")
-                OneLineListItem:
-                    text: "🏆 Ranking"
-                    font_size: "24sp"
-                    font_name: "NotoEmoji"  # Usa la fuente con soporte de emojis
+                    IconLeftWidget:
+                        icon: "home"
+
+                OneLineAvatarListItem:
+                    text: "Ranking"
                     on_release:
                         app.menu_callback("ranking")
-                OneLineListItem:
-                    text: "📈 Statistics"
-                    font_size: "24sp"
-                    font_name: "NotoEmoji"  # Usa la fuente con soporte de emojis
+                    IconLeftWidget:
+                        icon: "trophy"
+
+                OneLineAvatarListItem:
+                    text: "Statistics"
                     on_release:
                         app.menu_callback("statistics")
-                OneLineListItem:
-                    text: "Predictions"
-                    font_size: "24sp"
-                    font_name: "NotoEmoji"  # Usa la fuente con soporte de emojis
-                    on_release:
-                        app.menu_callback("predictions")
-                OneLineListItem:
-                    text: "💪 Reinforcement Activities"
-                    font_size: "24sp"
-                    font_name: "NotoEmoji"  # Usa la fuente con soporte de emojis
+                    IconLeftWidget:
+                        icon: "chart-line"
+
+                OneLineAvatarListItem:
+                    text: "Reinforcement Activities"
                     on_release:
                         app.menu_callback("reinforcement_activities")
+                    IconLeftWidget:
+                        icon: "arm-flex"
             
             # Logo principal
             Image:
                 source: '../../image/logo/logo_icon.png'
                 size_hint_y: 0.1
-                # height: "100dp"  # Ajusta la altura según sea necesario
-                allow_stretch: True  # Para que la imagen se ajuste al tamaño
+                allow_stretch: True
