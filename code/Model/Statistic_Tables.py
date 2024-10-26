@@ -199,3 +199,29 @@ def submition_temporal_graph(user_id, aula_id):
         # Ajustar y mostrar el gráfico
     plt.tight_layout()
     return plt
+
+
+
+def stats_Academic_Record_Mean_Marks(user_id):
+    submissions = pd.read_csv("./../../data/dataset.csv")
+    submissions = submissions[['userid', 'aula_id', 'activitat', "activitat_id", 'datesubmitted', 'attempt_number', 'mark', 'count_activities']]
+
+    submissions_user = submissions[submissions["userid"] == user_id]
+    return submissions_user["mark"].mean()
+    
+
+
+
+def stats_Academic_Record_Mean_Final_Grade(user_id):
+    submissions = pd.read_csv("./../../data/dataset.csv")
+    submissions = submissions[['userid', 'aula_id', 'F_Grade', 'R_Grade']].drop_duplicates()
+    submissions
+
+
+    submissions_user = submissions[submissions["userid"] == user_id]
+    # Crea la columna 'Nota_Final' basant-se en la condició donada
+    submissions_user['Nota_Final'] = np.where(submissions_user['R_Grade'].notna(), submissions_user['R_Grade'], submissions_user['F_Grade'])
+
+    submissions_user = submissions_user.dropna(subset=['Nota_Final'])
+
+    return submissions_user["Nota_Final"].mean()
