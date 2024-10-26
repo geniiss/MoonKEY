@@ -51,6 +51,7 @@ def pie_chart(user_id):
 
     import numpy as np
     marks_user_array = marks_user["F_Grade"].values
+    marks_user_array = marks_user_array[~pd.isna(marks_user_array)]
     marks_user_array_num = []
     for element in marks_user_array:
         marks_user_array_num.append(float(element.replace(",", ".")))
