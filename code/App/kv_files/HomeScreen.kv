@@ -8,12 +8,36 @@
             title: "MoonKEY"
             left_action_items: [["menu", lambda x: app.root.ids.nav_drawer.set_state("toggle")]]
         
-        # Usa la propiedad image_source para establecer la fuente de la imagen
+        # Imagen principal
         FitImage:
-            source: root.image_source  # Enlaza a la propiedad
+            source: root.image_source  # Enlaza a la propiedad de la imagen
             size_hint_y: None
-            height: "300dp"  # Ajusta la altura según necesites
+            height: "300dp"
         
+        # Texto específico debajo de la imagen
         MDLabel:
-            text: "Home Page"
+            text: root.image_text  # Enlaza a la propiedad del texto
             halign: "center"
+            font_style: "Subtitle1"
+
+        # Etiqueta para mostrar el valor de nota
+        MDLabel:
+            text: f"Nota: {root.nota}"  # Muestra el valor actual de la nota
+            halign: "center"
+            font_style: "Body1"
+
+        # Contenedor para centrar el botón
+        MDBoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: "50dp"
+            padding: dp(10)
+            spacing: dp(10)
+            pos_hint: {"center_x": 0.5}  # Centra el contenido horizontalmente
+
+            # Botón para incrementar la nota
+            MDRaisedButton:
+                text: "Incrementar Nota"
+                size_hint_x: None
+                width: "200dp"  # Puedes ajustar el ancho según necesites
+                on_release: root.incrementar_nota()  # Llama al método para incrementar nota

@@ -1,22 +1,62 @@
 from kivy.uix.screenmanager import Screen
 from kivy.lang import Builder
-from kivy.properties import StringProperty
+from kivy.properties import StringProperty, NumericProperty
 
 Builder.load_file("kv_files/HomeScreen.kv")
+
+# Enum de las diferentes calificaciones posibles
+FAILED = 1
+PASSED = 2
+GOOD = 3
+EXCELENT = 4
+ERROR = -1
+calification = {4:"EXCELENT", 3:"GOOD", 2:"PASSED", 1:"FAILED"}
+
+# Pasa de una nota del 0.0 al 10.0 a una nota categórica
+def numeric_grade_to_grade(grade):
+    match grade:
+        case grade if 0 <= grade < 5:
+            return FAILED
+        case grade if 5 <= grade < 7:
+            return PASSED
+        case grade if 7 <= grade < 9:
+            return GOOD
+        case grade if 9 <= grade <= 10:
+            return EXCELENT
+        case _:
+            return ERROR
+
 class HomeScreen(Screen):
     # Define una propiedad para la fuente de la imagen
     image_source = StringProperty("")
+    image_text = StringProperty("")  # Define el texto para esta imagen inicial
+    nota = NumericProperty()  # Variable para almacenar la nota
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.set_image(2)  # Llama a la función para establecer la imagen inicial
+        self.nota = 8.5
+        self.set_image(numeric_grade_to_grade(self.nota))
 
-    def set_image(self, imagen):
+    def incrementar_nota(self):
+        self.nota += 1
+        if self.nota > 10: self.nota = 1
+        self.set_image(numeric_grade_to_grade(self.nota))
+
+    def set_image(self, nota):
         # Cambia la fuente de la imagen según el valor de la variable
-        if imagen == 1:
+        self.image_text = calification[numeric_grade_to_grade(self.nota)] + "\n"
+
+        if nota == EXCELENT:
             self.image_source = "../../image/monkeys/happy.png"
-        elif imagen == 2:
-            self.image_source = "../../image/monkeys/sad.png"
-        elif imagen == 3:
-            self.image_source = "../../image/monkeys/angry.png"
-        # Puedes añadir más condiciones según tus necesidades
+            self.image_text += "Really good, you got the max mark!"
+        elif nota == GOOD:
+            self.image_source = "../../image/monkeys/smile.png"
+            self.image_text += "Good, keep it going!"
+        elif nota == PASSED:
+            self.image_source = "../../image/monkeys/sad2.png"
+            self.image_text += "A bit tight :/"
+        elif nota == FAILED:
+            self.image_source = "../../image/monkeys/angry2.png"
+            self.image_text += "Oh no, the moonkey got mad :O"
+        else:
+            print("Error")
