@@ -17,7 +17,7 @@ MDScreen:
         MDTopAppBar:
             title: "MoonKEY"
             left_action_items: [["menu", lambda x: nav_drawer.set_state("toggle")]]
-            elevation: 10  # Assegurem que tingui una capa superior
+            elevation: 0
 
         MDBoxLayout:
             orientation: 'vertical'
@@ -26,7 +26,7 @@ MDScreen:
     # Definim el Navigation Drawer com a últim element per garantir que quedi a sobre
     MDNavigationDrawer:
         id: nav_drawer
-        elevation: 8  # Major elevació per assegurar que quedi a sobre
+        elevation: 0
 
         MDBoxLayout:
             orientation: "vertical"
