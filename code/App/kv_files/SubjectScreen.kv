@@ -5,13 +5,11 @@
 
         MDLabel:
             id: subject_code_label
-            text: "Subject Code: "  # El text s'actualitzarà des del codi Python
+            text: "Subject Code: "
             halign: "center"
             font_style: "H4"
         
         MDRaisedButton:
             text: "Back"
             pos_hint: {"center_x": 0.5}
-            on_release:
-                app.root.current = "statistics"  # Torna a la pantalla de "statistics"
-                app.root.remove_widget(self)  # Elimina la pantalla de l'assignatura després de tornar
+            on_release: root.go_back()  # Crida la funció go_back() en SubjectScreen

@@ -11,7 +11,7 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from Screens.SubjectScreen import SubjectScreen
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'Model')))
 from pie_chart import pie_chart
-from Statistic_Tables import Academic_Record, stats_submitions
+from Statistic_Tables import Academic_Record, stats_Academic_Record_Mean_Final_Grade, stats_Academic_Record_Mean_Marks
 
 Builder.load_file("kv_files/StatisticsScreen.kv")
 
@@ -24,9 +24,8 @@ academic_record = Academic_Record(user_id)
 class StatisticsScreen(Screen):
     def on_enter(self, *args):
         # Establim els valors de les mitjanes directament des del codi
-        # stats = stats_submitions(user_id)
-        self.ids.final_grade_avg.text = "6.3"  # Actualitza el valor del label de final_grade_avg
-        self.ids.activity_grade_avg.text = "8.3"
+        self.ids.final_grade_avg.text = f'{stats_Academic_Record_Mean_Final_Grade(user_id):.2f}'
+        self.ids.activity_grade_avg.text = f'{stats_Academic_Record_Mean_Marks(user_id):.2f}'
 
         # Generem el gràfic amb la funció pie_chart
         plt_figure = pie_chart(user_id)
