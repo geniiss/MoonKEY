@@ -28,83 +28,114 @@ def Academic_Record_Subject(user_id, aula_id):
     return marks_user[marks["aula_id"] == aula_id]
 
 
+
 def pie_chart_submissions_user(user_id):
-    submissions =  pd.read_csv("./../../data/dataset.csv")
-    submissions = submissions[['userid', 'aula_id', 'activitat',"activitat_id", 'datesubmitted', 'attempt_number', 'mark', 'count_activities']]
-    submissions
+    fontsize = 18
+    submissions = pd.read_csv("./../../data/dataset.csv")
+    submissions = submissions[['userid', 'aula_id', 'activitat', "activitat_id", 'datesubmitted', 'attempt_number', 'mark', 'count_activities']]
 
     submissions_user = submissions[submissions["userid"] == user_id]
-    submissions_user
 
     conteo_por_aula = submissions_user.groupby('aula_id').size()
-
-    # Convertir el conteo a un DataFrame y renombrar la columna
     conteo_por_aula = conteo_por_aula.rename('conteo_registros').reset_index()
-
-    # Unir el conteo como una nueva columna en el DataFrame original
     submissions_user = submissions_user.merge(conteo_por_aula, on='aula_id', how='left')
     submissions_user['diferencia'] = submissions_user['count_activities'] - submissions_user['conteo_registros']
 
-
-
-    # Paso 2: Contar registros por aula_id y agregarlo como columna 'conteo_registros'
-    # Agrupamos el DataFrame submissions_user por 'aula_id' y contamos el número de registros en cada grupo
     conteo_por_aula = submissions_user.groupby('aula_id').size()
-
-    # Renombramos la serie a 'conteo_registros' y la convertimos en un DataFrame
     conteo_por_aula = conteo_por_aula.rename('conteo_registros').reset_index()
 
-    # Eliminar la columna 'conteo_registros' si ya existe en submissions_user
     if 'conteo_registros' in submissions_user.columns:
         submissions_user = submissions_user.drop(columns=['conteo_registros'])
 
-    # Realizamos un merge con submissions_user para agregar el conteo de registros como una nueva columna
     submissions_user = submissions_user.merge(conteo_por_aula, on='aula_id', how='left')
-
-    # Paso 3: Crear la columna 'diferencia' como la resta entre 'count_activities' y 'conteo_registros'
-    # Restamos la columna 'conteo_registros' de 'count_activities' y guardamos el resultado en una nueva columna 'diferencia'
     submissions_user['diferencia'] = submissions_user['count_activities'] - submissions_user['conteo_registros']
 
-    # Paso 4: Calcular suma_valores_distintos, la suma de los valores únicos en 'diferencia'
-    # Obtenemos los valores únicos en la columna 'diferencia' y calculamos su suma
     suma_valores_distintos = submissions_user['diferencia'].unique().sum()
-    
-
-
-
 
     count_mark_1 = (submissions_user['mark'] == 1).sum()
-
-    # Contar el número de registros donde mark es igual a 0
     count_mark_0 = (submissions_user['mark'] == 0).sum()
-
-    # Contar el número de registros donde mark está entre 0 y 1
     count_between_0_and_1 = ((submissions_user['mark'] > 0) & (submissions_user['mark'] < 1)).sum()
 
-
     sizes = [count_mark_1, count_between_0_and_1, count_mark_0, suma_valores_distintos]
-    labels = ['10', 'Other', '0',  'NaN']
+    labels = ['10', 'Other', '0', 'NaN']
     colors = ['#8BC34A', '#FFC107', '#FF4C4C', '#696969']  # Verde, rojo, amarillo, gris oscuro (DimGray)
 
-    # Crear el gráfico circular
+    # Crear el gráfico circular con ajustes para evitar superposición
     plt.pie(
         sizes,
         labels=labels,
         autopct='%1.1f%%',
         startangle=90,
-        colors=colors
+        colors=colors,
+        textprops={'fontsize': fontsize},
+        labeldistance=1.1,      # Alejar las etiquetas del centro
+        pctdistance=.7  # Ajustar la posición de los porcentajes
     )
 
-    # Asegurarse de que el gráfico sea circular
     plt.axis('equal')
 
-    # # Añadir la leyenda
-    # plt.legend(labels, loc="best", title="Categorías")
+    
+    return plt
 
-    # Mostrar el gráfico
-    plt.show()
+
+
+
+
 
 def pie_chart_submissions_user_aula(user_id, aula_id):
+    fontsize = 18
+    submissions = pd.read_csv("./../../data/dataset.csv")
+    submissions = submissions[['userid', 'aula_id', 'activitat', "activitat_id", 'datesubmitted', 'attempt_number', 'mark', 'count_activities']]
+
+    submissions_user = submissions[submissions["userid"] == user_id]
+    submissions_user = submissions_user[submissions_user["aula_id"] == aula_id]
+
+    conteo_por_aula = submissions_user.groupby('aula_id').size()
+    conteo_por_aula = conteo_por_aula.rename('conteo_registros').reset_index()
+    submissions_user = submissions_user.merge(conteo_por_aula, on='aula_id', how='left')
+    submissions_user['diferencia'] = submissions_user['count_activities'] - submissions_user['conteo_registros']
+
+    # Paso 2: Contar registros por aula_id y agregarlo como columna 'conteo_registros'
+    conteo_por_aula = submissions_user.groupby('aula_id').size()
+    conteo_por_aula = conteo_por_aula.rename('conteo_registros').reset_index()
+
+    if 'conteo_registros' in submissions_user.columns:
+        submissions_user = submissions_user.drop(columns=['conteo_registros'])
+
+    submissions_user = submissions_user.merge(conteo_por_aula, on='aula_id', how='left')
+    submissions_user['diferencia'] = submissions_user['count_activities'] - submissions_user['conteo_registros']
+
+    suma_valores_distintos = submissions_user['diferencia'].unique().sum()
+    
+    count_mark_1 = (submissions_user['mark'] == 1).sum()
+    count_mark_0 = (submissions_user['mark'] == 0).sum()
+    count_between_0_and_1 = ((submissions_user['mark'] > 0) & (submissions_user['mark'] < 1)).sum()
+
+    sizes = [count_mark_1, count_between_0_and_1, count_mark_0, suma_valores_distintos]
+    labels = ['10', 'Other', '0', 'NaN']
+    colors = ['#8BC34A', '#FFC107', '#FF4C4C', '#696969']  # Verde, rojo, amarillo, gris oscuro (DimGray)
+
+    # Crear el gráfico circular con fontsize aplicado
+    plt.pie(
+        sizes,
+        labels=labels,
+        autopct='%1.1f%%',
+        startangle=90,
+        colors=colors,
+        textprops={'fontsize': fontsize},
+        pctdistance=.7 
+    )
+
+    plt.axis('equal')
+
+    
+    return plt
+
+
+
+
+
+def stats_submitions(user_id, aula_id):
     submissions =  pd.read_csv("./../../data/dataset.csv")
     submissions = submissions[['userid', 'aula_id', 'activitat',"activitat_id", 'datesubmitted', 'attempt_number', 'mark', 'count_activities']]
 
@@ -113,70 +144,58 @@ def pie_chart_submissions_user_aula(user_id, aula_id):
     submissions_user = submissions_user[ submissions_user["aula_id"] == aula_id]
     submissions_user
 
-    conteo_por_aula = submissions_user.groupby('aula_id').size()
+    # Número de registros en submissions_user
+    num_registros = len(submissions_user)
 
-    # Convertir el conteo a un DataFrame y renombrar la columna
-    conteo_por_aula = conteo_por_aula.rename('conteo_registros').reset_index()
+    # Promedio de la columna 'mark'
+    average_mark = submissions_user['mark'].mean()
 
-    # Unir el conteo como una nueva columna en el DataFrame original
-    submissions_user = submissions_user.merge(conteo_por_aula, on='aula_id', how='left')
-    submissions_user['diferencia'] = submissions_user['count_activities'] - submissions_user['conteo_registros']
+    # Crear un array con los resultados
+    resultado = np.array([num_registros, average_mark])
 
-
-
-    # Paso 2: Contar registros por aula_id y agregarlo como columna 'conteo_registros'
-    # Agrupamos el DataFrame submissions_user por 'aula_id' y contamos el número de registros en cada grupo
-    conteo_por_aula = submissions_user.groupby('aula_id').size()
-
-    # Renombramos la serie a 'conteo_registros' y la convertimos en un DataFrame
-    conteo_por_aula = conteo_por_aula.rename('conteo_registros').reset_index()
-
-    # Eliminar la columna 'conteo_registros' si ya existe en submissions_user
-    if 'conteo_registros' in submissions_user.columns:
-        submissions_user = submissions_user.drop(columns=['conteo_registros'])
-
-    # Realizamos un merge con submissions_user para agregar el conteo de registros como una nueva columna
-    submissions_user = submissions_user.merge(conteo_por_aula, on='aula_id', how='left')
-
-    # Paso 3: Crear la columna 'diferencia' como la resta entre 'count_activities' y 'conteo_registros'
-    # Restamos la columna 'conteo_registros' de 'count_activities' y guardamos el resultado en una nueva columna 'diferencia'
-    submissions_user['diferencia'] = submissions_user['count_activities'] - submissions_user['conteo_registros']
-
-    # Paso 4: Calcular suma_valores_distintos, la suma de los valores únicos en 'diferencia'
-    # Obtenemos los valores únicos en la columna 'diferencia' y calculamos su suma
-    suma_valores_distintos = submissions_user['diferencia'].unique().sum()
-    
+    # Mostrar el resultado
+    return resultado
 
 
 
 
-    count_mark_1 = (submissions_user['mark'] == 1).sum()
+def submition_temporal_graph(user_id, aula_id):
+    import matplotlib.dates as mdates
+    fontsize = 18
 
-    # Contar el número de registros donde mark es igual a 0
-    count_mark_0 = (submissions_user['mark'] == 0).sum()
+    submissions =  pd.read_csv("./../../data/dataset.csv")
+    submissions = submissions[['userid', 'aula_id', 'activitat',"activitat_id", 'datesubmitted', 'attempt_number', 'mark', 'count_activities']]
 
-    # Contar el número de registros donde mark está entre 0 y 1
-    count_between_0_and_1 = ((submissions_user['mark'] > 0) & (submissions_user['mark'] < 1)).sum()
-    
 
-    sizes = [count_mark_1, count_between_0_and_1, count_mark_0, suma_valores_distintos]
-    labels = ['10', 'Other', '0',  'NaN']
-    colors = ['#8BC34A', '#FFC107', '#FF4C4C', '#696969']  # Verde, rojo, amarillo, gris oscuro (DimGray)
+    submissions_user = submissions[submissions["userid"] == user_id]
+    submissions_user = submissions_user[ submissions_user["aula_id"] == aula_id]
 
-    # Crear el gráfico circular
-    plt.pie(
-        sizes,
-        labels=labels,
-        autopct='%1.1f%%',
-        startangle=90,
-        colors=colors
-    )
+    # Convertir la columna 'datesubmitted' a formato de fecha (sin horas)
+    submissions_user['datesubmitted'] = pd.to_datetime(submissions_user['datesubmitted']).dt.date
 
-    # Asegurarse de que el gráfico sea circular
-    plt.axis('equal')
+    # Agrupar por 'datesubmitted' y sumar los valores de 'attempt_number'
+    submissions_agrupado = submissions_user.groupby('datesubmitted', as_index=False)['attempt_number'].sum()
 
-    # # Añadir la leyenda
-    # plt.legend(labels, loc="best", title="Categorías")
+    # Crear el gráfico
+    plt.figure(figsize=(10, 5))
+    plt.plot(submissions_agrupado['datesubmitted'], submissions_agrupado['attempt_number'], marker='o', linestyle='-', color='#c09268', linewidth=3)
 
-    # Mostrar el gráfico
-    plt.show()
+    # Personalizar el gráfico para un estilo minimalista
+
+    plt.xlabel('', fontsize=fontsize)
+    plt.ylabel('Submitions', fontsize=fontsize)
+    plt.xticks(rotation=45, fontsize = fontsize)
+    plt.yticks(np.arange(0, submissions_agrupado['attempt_number'].max() + 1, 5), fontsize= fontsize)
+
+    # Formato de la fecha en el eje X
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%d-%m-%y'))
+
+    # Ocultar bordes no deseados
+    plt.gca().spines['top'].set_visible(False)
+    plt.gca().spines['right'].set_visible(False)
+    plt.gca().spines['left'].set_visible(True)
+    plt.gca().spines['bottom'].set_visible(True)
+
+        # Ajustar y mostrar el gráfico
+    plt.tight_layout()
+    return plt
