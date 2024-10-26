@@ -34,12 +34,5 @@ class StatisticsScreen(Screen):
         # Crear una imatge a partir de la textura i afegir-la a la interfície
         img = Image(texture=texture)
         self.ids.chart_box.add_widget(img)
-        
-        # Afegir un títol a la imatge
-        # Add the title label to the chart_box
-        title_label = Label(text="Títol del Gràfic", size_hint_y=None, height=40)
-        self.ids.chart_box.add_widget(title_label)
-        
-        # Ajustar la posició dels elements per fer que es vegin més baixos
-        for widget in self.ids.chart_box.children:
-            widget.y -= 100  # Ajustar aquest valor segons sigui necessari
+
+

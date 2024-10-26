@@ -2,13 +2,30 @@
     name: "statistics"
     MDBoxLayout:
         orientation: 'vertical'
+        
         MDTopAppBar:
             title: "Statistics"
             left_action_items: [["menu", lambda x: app.root.ids.nav_drawer.set_state("toggle")]]
-        MDBoxLayout:
-            id: chart_box  # Això defineix el chart_box dins la interfície
-            orientation: 'vertical'
-        MDLabel:
-            text: "Statistics Page"
-            halign: "center"
         
+        ScrollView:
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+
+                MDLabel:
+                    text: "Subject record:"
+                    halign: "center"
+                    font_style: "Body1"
+                    size_hint_y: None
+                    height: self.texture_size[1] + dp(10)
+                
+                MDBoxLayout:
+                    id: chart_box
+                    orientation: 'vertical'
+                    size_hint_y: None
+                    height: dp(300)
+
+                    Widget:  # Espaiador opcional
+                        size_hint_y: None
+                        height: 30
