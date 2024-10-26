@@ -1,4 +1,8 @@
 def Academic_Record(user_id):
+    activities = pd.read_csv("./../../data/activitats.csv", encoding='ISO-8859-1')
+    marks = pd.read_csv("./../../data/notes.csv", delimiter=';')
+    submision = pd.read_csv("./../../data/trameses.csv")
+
     marks_user = marks[(marks["userid"] == user_id)]
 
     #Transforma los formatos de fecha UNIX
@@ -18,6 +22,10 @@ def Academic_Record(user_id):
 
 
 def Academic_Record_Subject(user_id, aula_id):
+    activities = pd.read_csv("./../../data/activitats.csv", encoding='ISO-8859-1')
+    marks = pd.read_csv("./../../data/notes.csv", delimiter=';')
+    submision = pd.read_csv("./../../data/trameses.csv")
+    
     marks_user = marks[(marks["userid"] == user_id)]
 
     #Transforma los formatos de fecha UNIX
@@ -208,7 +216,7 @@ def stats_Academic_Record_Mean_Marks(user_id):
 
     submissions_user = submissions[submissions["userid"] == user_id]
     return submissions_user["mark"].mean()
-    
+
 
 
 
