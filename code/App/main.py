@@ -21,11 +21,11 @@ llista_assigs = {
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen, ScreenManager
 from kivymd.app import MDApp
-from code.App.Screens.HomeScreen import HomeScreen
-from code.App.Screens.RankingScreen import RankingScreen
-from code.App.Screens.StatisticsScreen import StatisticsScreen
-from code.App.Screens.PredictionsScreen import PredictionsScreen
-from code.App.Screens.ReinforcementActivitiesScreen import ReinforcementActivitiesScreen
+from Screens.HomeScreen import HomeScreen
+from Screens.RankingScreen import RankingScreen
+from Screens.StatisticsScreen import StatisticsScreen
+from Screens.PredictionsScreen import PredictionsScreen
+from Screens.ReinforcementActivitiesScreen import ReinforcementActivitiesScreen
 
 class MainApp(MDApp):
 
