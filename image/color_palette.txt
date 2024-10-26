@@ -1,0 +1,2 @@
+Este es el color algo más brillante: #c09268
+Este es el color del fondo: #dbcfbf
