@@ -5,6 +5,10 @@
         MDTopAppBar:
             title: "Statistics"
             left_action_items: [["menu", lambda x: app.root.ids.nav_drawer.set_state("toggle")]]
+        MDBoxLayout:
+            id: chart_box  # Això defineix el chart_box dins la interfície
+            orientation: 'vertical'
         MDLabel:
             text: "Statistics Page"
             halign: "center"
+        

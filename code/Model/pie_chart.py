@@ -72,7 +72,4 @@ def pie_chart(user_id):
     return plt
 
 
-pie_chart(155).show()
-
-
 
