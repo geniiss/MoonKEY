@@ -25,6 +25,7 @@ submision_activities_marks["NOT_Presented_R"] = np.where(submision_activities_ma
 submision_activities_marks["P_Grade_Date"] = pd.to_datetime(submision_activities_marks['P_Grade_Date'], unit='s')
 submision_activities_marks["F_Grade_Date"] = pd.to_datetime(submision_activities_marks['F_Grade_Date'], unit='s')
 submision_activities_marks["R_Grade_Date"] = pd.to_datetime(submision_activities_marks['R_Grade_Date'], unit='s')
+submision_activities_marks['Nota_Final'] = np.where(submision_activities_marks['R_Grade'].notna(), submision_activities_marks['R_Grade'], submision_activities_marks['F_Grade'])
 submision_activities_marks["datesubmitted"] = pd.to_datetime(submision_activities_marks['datesubmitted'], unit='s')
 submision_activities_marks["dategraded"] = pd.to_datetime(submision_activities_marks['dategraded'], unit='s')
 submision_activities_marks["startdate"] = pd.to_datetime(submision_activities_marks['startdate'], unit='s')
@@ -32,12 +33,14 @@ submision_activities_marks["duedate"] = pd.to_datetime(submision_activities_mark
 submision_activities_marks['rank_P'] = submision_activities_marks.groupby('aula_id')['P_Grade'].rank(method='dense', ascending=False)
 submision_activities_marks['rank_F'] = submision_activities_marks.groupby('aula_id')['F_Grade'].rank(method='dense', ascending=False)
 submision_activities_marks['rank_R'] = submision_activities_marks.groupby('aula_id')['R_Grade'].rank(method='dense', ascending=False)
+submision_activities_marks['rank_FG'] = submision_activities_marks.groupby('aula_id')['Nota_Final'].rank(method='dense', ascending=False)
 submision_activities_marks["P_Grade"] = submision_activities_marks["P_Grade"].str.replace(',', '.', regex=False).astype(float)
 submision_activities_marks["F_Grade"] = submision_activities_marks["F_Grade"].str.replace(',', '.', regex=False).astype(float)
 submision_activities_marks["R_Grade"] = submision_activities_marks["R_Grade"].str.replace(',', '.', regex=False).astype(float)
 
 
-dataset = submision_activities_marks[["userid", "aula_id", "activitat_id", "activitat", "startdate", "duedate", "datesubmitted", "dategraded", "attempt_number", "mark", "NOT_Presented_P", "P_Grade", "P_Grade_Date", "NOT_Presented_F", "F_Grade", "F_Grade_Date", "NOT_Presented_R", "R_Grade", "R_Grade_Date", "rank_P", "rank_F", "rank_R", "count_activities"]]
+dataset = submision_activities_marks[["userid", "aula_id", "activitat_id", "activitat", "startdate", "duedate", "datesubmitted", "dategraded", "attempt_number", "mark", "NOT_Presented_P", "P_Grade", "P_Grade_Date", "NOT_Presented_F", "F_Grade", "F_Grade_Date", "NOT_Presented_R", "R_Grade", "R_Grade_Date", "rank_P", "rank_F", "rank_R", "count_activities", "Nota_Final", "rank_FG"]]
+
 
 dataset = dataset.astype({
     "userid": "int64",                # ID de usuario (número entero)
@@ -67,3 +70,4 @@ dataset = dataset.astype({
 print(dataset)
 
 dataset.to_csv('./../../data/dataset.csv', index=False)
+
