@@ -31,6 +31,6 @@ submision_activities_marks['rank_P'] = submision_activities_marks.groupby('aula_
 submision_activities_marks['rank_F'] = submision_activities_marks.groupby('aula_id')['F_Grade'].rank(method='dense', ascending=False)
 submision_activities_marks['rank_R'] = submision_activities_marks.groupby('aula_id')['R_Grade'].rank(method='dense', ascending=False)
 
-dataset = submision_activities_marks[["userid", "aula_id", "activitat_id", "activitat", "startdate", "duedate", "datesubmitted", "dategraded", "attempt_number", "mark", "NOT_Presented_P", "P_Grade", "P_Grade_Date", "NOT_Presented_F", "F_Grade", "F_Grade_Date", "NOT_Presented_R", "R_Grade", "R_Grade_Date"]]
+dataset = submision_activities_marks[["userid", "aula_id", "activitat_id", "activitat", "startdate", "duedate", "datesubmitted", "dategraded", "attempt_number", "mark", "NOT_Presented_P", "P_Grade", "P_Grade_Date", "NOT_Presented_F", "F_Grade", "F_Grade_Date", "NOT_Presented_R", "R_Grade", "R_Grade_Date", "rank_P", "rank_F", "rank_R"]]
 
 dataset.to_csv('./../../data/dataset.csv', index=False)
