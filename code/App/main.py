@@ -1,3 +1,6 @@
+from kivy.config import Config
+Config.read('config.ini')  # Cargar la configuración antes de importar otros módulos
+
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen, ScreenManager
 from kivymd.app import MDApp
@@ -8,15 +11,14 @@ from Screens.PredictionsScreen import PredictionsScreen
 from Screens.ReinforcementActivitiesScreen import ReinforcementActivitiesScreen
 
 class MainApp(MDApp):
-
     def build(self):
         self.theme_cls.primary_palette = "Brown"
         return Builder.load_file("./main.kv")
 
     def menu_callback(self, screen_name):
-        # Canvia a la pantalla seleccionada
+        # Cambia a la pantalla seleccionada
         self.root.ids.screen_manager.current = screen_name
-        # Tanca el menú després de seleccionar una opció
+        # Cierra el menú después de seleccionar una opción
         self.root.ids.nav_drawer.set_state("close")
 
 if __name__ == '__main__':
