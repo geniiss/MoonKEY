@@ -1,0 +1,64 @@
+MDScreen:
+
+    # ScreenManager al mateix nivell que el MDNavigationDrawer per mantenir el menú a sobre
+    ScreenManager:
+        id: screen_manager
+
+        HomeScreen:
+        RankingScreen:
+        StatisticsScreen:
+        PredictionsScreen:
+        ReinforcementActivitiesScreen:
+
+    # El BoxLayout principal amb la barra superior
+    MDBoxLayout:
+        orientation: 'vertical'
+
+        MDTopAppBar:
+            title: "MoonKEY"
+            left_action_items: [["menu", lambda x: nav_drawer.set_state("toggle")]]
+            elevation: 10  # Assegurem que tingui una capa superior
+
+        MDBoxLayout:
+            orientation: 'vertical'
+            id: content
+
+    # Definim el Navigation Drawer com a últim element per garantir que quedi a sobre
+    MDNavigationDrawer:
+        id: nav_drawer
+        elevation: 8  # Major elevació per assegurar que quedi a sobre
+
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: "8dp"
+            padding: "8dp"
+
+            MDLabel:
+                text: "Menu"
+                font_style: "H5"
+                halign: "center"
+                size_hint_y: None
+                height: self.texture_size[1]
+
+            ScrollView:
+                MDList:
+                    OneLineListItem:
+                        text: "Home"
+                        on_release:
+                            app.menu_callback("home")
+                    OneLineListItem:
+                        text: "Ranking"
+                        on_release:
+                            app.menu_callback("ranking")
+                    OneLineListItem:
+                        text: "Statistics"
+                        on_release:
+                            app.menu_callback("statistics")
+                    OneLineListItem:
+                        text: "Predictions"
+                        on_release:
+                            app.menu_callback("predictions")
+                    OneLineListItem:
+                        text: "Reinforcement Activities"
+                        on_release:
+                            app.menu_callback("reinforcement_activities")

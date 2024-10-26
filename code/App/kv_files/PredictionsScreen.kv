@@ -1,0 +1,22 @@
+<PredictionsScreen>:
+    name: "predictions"
+    elevation: 3
+    MDBoxLayout:
+        orientation: 'vertical'
+
+        MDTopAppBar:
+            title: "Predictions"
+            left_action_items: [["menu", lambda x: app.root.ids.nav_drawer.set_state("toggle")]]
+
+        MDLabel:
+            elevation: 3
+            text: "Prediccions d'Assignatures i Notes"
+            halign: "center"
+            font_style: "H6"
+            size_hint_y: None
+            height: self.texture_size[1] + dp(10)
+
+        ScrollView:
+            elevation: 3
+            MDList:
+                id: predictions_list
