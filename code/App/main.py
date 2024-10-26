@@ -14,7 +14,8 @@ Header = {
     "home": "MoonKEY",
     "ranking": "Ranking",
     "statistics": "Statistics",
-    "predictions": "Predictions"
+    "predictions": "Predictions",
+    "reinforcement_activities": "Reinforcement Activities"
 }
 class MainApp(MDApp):
     def build(self):
