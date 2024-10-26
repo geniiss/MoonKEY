@@ -9,7 +9,7 @@ from kivy.core.text import LabelBase
 from Screens.HomeScreen import HomeScreen
 from Screens.RankingScreen import RankingScreen
 from Screens.StatisticsScreen import StatisticsScreen
-from Screens.ReinforcementActivitiesScreen import ReinforcementActivitiesScreen
+from Screens.TrainingActivitiesScreen import TrainingActivitiesScreen
 
 LabelBase.register(name="NotoEmoji", fn_regular="../../image/fonts/NotoEmoji.ttf")
 
@@ -17,7 +17,7 @@ Header = {
     "home": "MoonKEY",
     "ranking": "Ranking",
     "statistics": "Statistics",
-    "reinforcement_activities": "Reinforcement Activities"
+    "training_activities": "Training Activities"
 }
 
 class MainApp(MDApp):
