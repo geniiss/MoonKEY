@@ -4,11 +4,15 @@ Config.read('config.ini')  # Cargar la configuraci√≥n antes de importar otros m√
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen, ScreenManager
 from kivymd.app import MDApp
+from kivy.core.text import LabelBase
+
 from Screens.HomeScreen import HomeScreen
 from Screens.RankingScreen import RankingScreen
 from Screens.StatisticsScreen import StatisticsScreen
 from Screens.PredictionsScreen import PredictionsScreen
 from Screens.ReinforcementActivitiesScreen import ReinforcementActivitiesScreen
+
+LabelBase.register(name="NotoEmoji", fn_regular="../../image/fonts/NotoEmoji.ttf")
 
 Header = {
     "home": "MoonKEY",

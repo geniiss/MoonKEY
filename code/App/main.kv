@@ -1,5 +1,4 @@
 MDScreen:
-
     # ScreenManager al mateix nivell que el MDNavigationDrawer per mantenir el menú a sobre
     ScreenManager:
         id: screen_manager
@@ -45,22 +44,32 @@ MDScreen:
                 size_hint_y: 0.7
                 OneLineListItem:
                     text: "🏠 Home"
+                    font_size: "60sp"
+                    font_name: "NotoEmoji"  # Usa la fuente con soporte de emojis
                     on_release:
                         app.menu_callback("home")
                 OneLineListItem:
                     text: "🏆 Ranking"
+                    font_size: "24sp"
+                    font_name: "NotoEmoji"  # Usa la fuente con soporte de emojis
                     on_release:
                         app.menu_callback("ranking")
                 OneLineListItem:
                     text: "📈 Statistics"
+                    font_size: "24sp"
+                    font_name: "NotoEmoji"  # Usa la fuente con soporte de emojis
                     on_release:
                         app.menu_callback("statistics")
                 OneLineListItem:
                     text: "Predictions"
+                    font_size: "24sp"
+                    font_name: "NotoEmoji"  # Usa la fuente con soporte de emojis
                     on_release:
                         app.menu_callback("predictions")
                 OneLineListItem:
                     text: "💪 Reinforcement Activities"
+                    font_size: "24sp"
+                    font_name: "NotoEmoji"  # Usa la fuente con soporte de emojis
                     on_release:
                         app.menu_callback("reinforcement_activities")
             
