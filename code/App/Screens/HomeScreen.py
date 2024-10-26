@@ -34,7 +34,7 @@ class HomeScreen(Screen):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.nota = 8.5
+        self.nota = 1
         self.set_image(numeric_grade_to_grade(self.nota))
 
     def incrementar_nota(self):

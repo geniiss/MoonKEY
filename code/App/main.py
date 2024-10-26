@@ -10,6 +10,14 @@ from Screens.StatisticsScreen import StatisticsScreen
 from Screens.PredictionsScreen import PredictionsScreen
 from Screens.ReinforcementActivitiesScreen import ReinforcementActivitiesScreen
 
+Header = {
+    "home": "MoonKEY",
+    "ranking": "Ranking",
+    "statistics": "Statistics",
+    "predictions": "Predictions",
+    "reinforcement_activities": "Reinforcement Activities"
+}
+
 class MainApp(MDApp):
     def build(self):
         self.theme_cls.primary_palette = "Brown"
@@ -17,6 +25,7 @@ class MainApp(MDApp):
 
     def menu_callback(self, screen_name):
         # Cambia a la pantalla seleccionada
+        self.root.ids.top_bar.title = Header[screen_name]
         self.root.ids.screen_manager.current = screen_name
         # Cierra el menú después de seleccionar una opción
         self.root.ids.nav_drawer.set_state("close")
