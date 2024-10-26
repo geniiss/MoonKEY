@@ -8,6 +8,7 @@ submision = submision.sort_values(by=['userid', 'activitat_id', 'datesubmitted']
 submision['attempt_number'] = submision.groupby(['userid', 'activitat_id']).cumcount() + 1
 submision = submision.sort_values(by=['userid', 'activitat_id', 'grade', 'dategraded'], ascending=[True, True, False, True])
 submision = submision.drop_duplicates(subset=['userid', 'activitat_id'], keep='first')
+submision['grade'] = submision['grade'].replace(-1, 0)
 
 activities = pd.read_csv("./../../data/activitats.csv", encoding='ISO-8859-1')
 
