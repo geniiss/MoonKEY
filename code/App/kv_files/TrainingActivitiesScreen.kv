@@ -8,7 +8,17 @@
         MDLabel:
             text: "Training Activities Page"
             halign: "center"
-        # Espaciador para evitar que el contenido se solape con la sombra de la barra de herramientas
         Widget:
             size_hint_y: None
             height: "10dp"  # Ajusta la altura según el tamaño de la sombra
+
+        MDCard:
+            size_hint: None, None
+            size: "280dp", "100dp"
+            pos_hint: {"center_x": 0.5}
+            elevation: 10
+            padding: "10dp"
+            MDLabel:
+                text: root.card_text  # Se enlaza a la propiedad en Python
+                halign: "center"
+                theme_text_color: "Secondary"
