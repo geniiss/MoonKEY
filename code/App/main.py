@@ -17,6 +17,7 @@ Header = {
     "predictions": "Predictions",
     "reinforcement_activities": "Reinforcement Activities"
 }
+
 class MainApp(MDApp):
     def build(self):
         self.theme_cls.primary_palette = "Brown"

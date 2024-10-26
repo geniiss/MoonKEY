@@ -1,36 +1,58 @@
-<StatisticsScreen>:
+<StatisticsScreen>: 
     name: "statistics"
     MDBoxLayout:
         orientation: 'vertical'
         
-        MDTopAppBar:
-            title: "Statistics"
-            left_action_items: [["menu", lambda x: app.root.ids.nav_drawer.set_state("toggle")]]
+        # Eliminem el MDTopAppBar si ja està definit a nivell superior
         
-        # Espaciador para evitar que el contenido se solape con la sombra de la barra de herramientas
-        Widget:
-            size_hint_y: None
-            height: "10dp"  # Ajusta la altura según el tamaño de la sombra
-        
-        ScrollView:
+        AnchorLayout:
+            anchor_y: 'top'  # Forcem que el contingut estigui a la part superior
+            
             MDBoxLayout:
-                orientation: 'vertical'
+                padding: dp(50)
+                orientation: 'horizontal'
                 size_hint_y: None
-                height: self.minimum_height
+                height: dp(250)  # Ajusta aquesta alçada segons el que necessitis
 
-                MDLabel:
-                    text: "Subject record:"
-                    halign: "center"
-                    font_style: "Body1"
-                    size_hint_y: None
-                    height: self.texture_size[1] + dp(10)
+                # Columna esquerra per a les labels de números
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    size_hint_x: 0.3
+                    padding: dp(10)
+
+                    MDLabel:
+                        text: "Final Grade Avg:"
+                        halign: "center"
+                        font_style: "Body1"
+                        size_hint_y: None
+                        height: dp(30)
+                    
+                    MDLabel:
+                        id: final_grade_avg
+                        text: "0.0"  # Valor inicial que actualitzarem des del codi Python
+                        halign: "center"
+                        font_style: "H6"
+                        size_hint_y: None
+                        height: dp(50)
+                    
+                    MDLabel:
+                        text: "Activity Grade Avg:"
+                        halign: "center"
+                        font_style: "Body1"
+                        size_hint_y: None
+                        height: dp(30)
+                    
+                    MDLabel:
+                        id: activity_grade_avg
+                        text: "0.0"  # Valor inicial que actualitzarem des del codi Python
+                        halign: "center"
+                        font_style: "H6"
+                        size_hint_y: None
+                        height: dp(50)
                 
+                # Columna dreta per a la gràfica
                 MDBoxLayout:
                     id: chart_box
                     orientation: 'vertical'
-                    size_hint_y: None
-                    height: dp(300)
-
-                    Widget:  # Espaiador opcional
-                        size_hint_y: None
-                        height: 30
+                    size_hint_x: 0.7
+                    padding: dp(10)
