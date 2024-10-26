@@ -1,4 +1,5 @@
 /code/.venv
 /code/App/__pycache__
+/code/App/Screens/__pycache__
 /.buildozer
 /bin

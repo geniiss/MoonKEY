@@ -8,11 +8,11 @@
             title: "MoonKEY"
             left_action_items: [["menu", lambda x: app.root.ids.nav_drawer.set_state("toggle")]]
         
-        # Afegim la imatge dins del layout
+        # Usa la propiedad image_source para establecer la fuente de la imagen
         FitImage:
-            source: "../../image/monkeys/happy.png"
+            source: root.image_source  # Enlaza a la propiedad
             size_hint_y: None
-            height: "300dp"  # Ajusta l'alçada segons necessitis
+            height: "300dp"  # Ajusta la altura según necesites
         
         MDLabel:
             text: "Home Page"
