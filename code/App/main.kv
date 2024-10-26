@@ -32,34 +32,41 @@ MDScreen:
         MDBoxLayout:
             orientation: "vertical"
             spacing: "8dp"
-            padding: "8dp"
+            padding: "10dp"
 
-            MDLabel:
-                text: "Menu"
-                font_style: "H5"
-                halign: "center"
-                size_hint_y: None
-                height: self.texture_size[1]
+            # Texto de la marca
+            Image:
+                source: '../../image/logo/text_moonkey.png'
+                size_hint_y: 0.2
+                # height: "100dp"  # Ajusta la altura según sea necesario
+                allow_stretch: True  # Para que la imagen se ajuste al tamaño
 
-            ScrollView:
-                MDList:
-                    OneLineListItem:
-                        text: "Home"
-                        on_release:
-                            app.menu_callback("home")
-                    OneLineListItem:
-                        text: "Ranking"
-                        on_release:
-                            app.menu_callback("ranking")
-                    OneLineListItem:
-                        text: "Statistics"
-                        on_release:
-                            app.menu_callback("statistics")
-                    OneLineListItem:
-                        text: "Predictions"
-                        on_release:
-                            app.menu_callback("predictions")
-                    OneLineListItem:
-                        text: "Reinforcement Activities"
-                        on_release:
-                            app.menu_callback("reinforcement_activities")
+            MDList:
+                size_hint_y: 0.7
+                OneLineListItem:
+                    text: "[🏠] Home"
+                    on_release:
+                        app.menu_callback("home")
+                OneLineListItem:
+                    text: "[🏆] Ranking"
+                    on_release:
+                        app.menu_callback("ranking")
+                OneLineListItem:
+                    text: "[📈] Statistics"
+                    on_release:
+                        app.menu_callback("statistics")
+                OneLineListItem:
+                    text: "[] Predictions"
+                    on_release:
+                        app.menu_callback("predictions")
+                OneLineListItem:
+                    text: "[💪] Reinforcement Activities"
+                    on_release:
+                        app.menu_callback("reinforcement_activities")
+            
+            # Logo principal
+            Image:
+                source: '../../image/logo/logo_icon.png'
+                size_hint_y: 0.1
+                # height: "100dp"  # Ajusta la altura según sea necesario
+                allow_stretch: True  # Para que la imagen se ajuste al tamaño
