@@ -63,7 +63,7 @@ def pie_chart(user_id):
     porcentajes_filtrados = [p for p in marks_user_array_perc if p > 0]
     labels = ['Fail', 'Pass', 'Good', 'Excellent']
     labels_filtradas = [labels[i] for i in range(len(marks_user_array_perc)) if marks_user_array_perc[i] > 0]
-    colors = ['skyblue', 'salmon', 'yellowgreen', 'lightcoral'] 
+    colors = ['#FF4C4C', '#FFC107', '#8BC34A', '#388E3C'] 
     colors_filtradas = [colors[i] for i in range(len(marks_user_array_perc)) if marks_user_array_perc[i] > 0]
 
     plt.pie(porcentajes_filtrados, labels=labels_filtradas, colors=colors_filtradas, autopct='%1.1f%%', startangle=140, textprops={'fontsize': 18})
