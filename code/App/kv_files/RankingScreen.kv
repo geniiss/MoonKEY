@@ -2,13 +2,25 @@
     name: "ranking"
     MDBoxLayout:
         orientation: 'vertical'
+        
         MDTopAppBar:
             title: "Ranking"
             left_action_items: [["menu", lambda x: app.root.ids.nav_drawer.set_state("toggle")]]
+        
+        # Imagen estática del mono
+        Image:
+            source: root.image_source
+            size_hint_y: 0.5
+            allow_stretch: True
+            keep_ratio: True
+        
+        # Texto estático debajo de la imagen
         MDLabel:
-            text: "Ranking Page"
+            text: root.image_text
             halign: "center"
+            font_style: "H5"
+        
         # Espaciador para evitar que el contenido se solape con la sombra de la barra de herramientas
         Widget:
             size_hint_y: None
-            height: "10dp"  # Ajusta la altura según el tamaño de la sombra
+            height: "10dp"
