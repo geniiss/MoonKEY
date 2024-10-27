@@ -2,7 +2,12 @@
     name: "statistics"
     MDBoxLayout:
         orientation: 'vertical'
-        
+
+        # Espaciador para evitar que el contenido se solape con la sombra de la barra de herramientas
+        Widget:
+            size_hint_y: None
+            height: "10dp"  # Ajusta la altura según el tamaño de la sombra
+
         AnchorLayout:
             anchor_y: 'top'
             
