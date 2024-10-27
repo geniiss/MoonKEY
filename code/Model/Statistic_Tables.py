@@ -110,7 +110,7 @@ def pie_chart_submissions_user(user_id):
 
 
 def pie_chart_submissions_user_aula(user_id, aula_id):
-    fontsize = 18
+    fontsize = 24
     submissions = pd.read_csv("./../../data/dataset.csv")
     submissions = submissions[['userid', 'aula_id', 'activitat', "activitat_id", 'datesubmitted', 'attempt_number', 'mark', 'count_activities']]
 
