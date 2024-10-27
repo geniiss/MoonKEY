@@ -43,6 +43,8 @@ def calcular_porcentajes(clasificaciones):
 
 user_id = 155
 def pie_chart(user_id):
+
+    plt.figure(facecolor='#fafafa')
     
     marks_user = marks[(marks["userid"] == user_id)]
     marks_user
