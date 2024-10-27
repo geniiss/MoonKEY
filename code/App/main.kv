@@ -15,6 +15,7 @@ MDScreen:
         MDTopAppBar:
             id: top_bar
             title: "MoonKEY"
+            font_style: "H6"
             left_action_items: [["menu", lambda x: nav_drawer.set_state("toggle")]]
             theme_icon_color: "Custom"
             right_action_items: [["", lambda x: None]]
@@ -45,28 +46,36 @@ MDScreen:
                 size_hint_y: 0.7
 
                 OneLineAvatarListItem:
+                    id: home_item
                     text: "Home"
+                    font_style: "Body1"
                     on_release:
                         app.menu_callback("home")
                     IconLeftWidget:
                         icon: "home"
 
                 OneLineAvatarListItem:
+                    id: ranking_item
                     text: "Ranking"
+                    font_style: "Body1"
                     on_release:
                         app.menu_callback("ranking")
                     IconLeftWidget:
                         icon: "trophy"
 
                 OneLineAvatarListItem:
+                    id: statistics_item
                     text: "Statistics"
+                    font_style: "Body1"
                     on_release:
                         app.menu_callback("statistics")
                     IconLeftWidget:
                         icon: "chart-line"
 
                 OneLineAvatarListItem:
+                    id: training_activities_item
                     text: "Training Activities"
+                    font_style: "Body1"
                     on_release:
                         app.menu_callback("training_activities")
                     IconLeftWidget:
