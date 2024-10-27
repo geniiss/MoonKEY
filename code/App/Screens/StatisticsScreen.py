@@ -61,7 +61,7 @@ class StatisticsScreen(Screen):
             fecha_final = academic_record['Fecha_Final'].values[i]
             # [aula_id, nota_final, fecha_final] = subject
             # Crea un elemento de lista con el aula_id como texto y añade la función para abrir la pantalla correspondiente
-            item = OneLineListItem(text=f"Aula ID: {aula_id} - Nota: {nota_final}", 
+            item = OneLineListItem(text=f"              Subject: {aula_id}                Grade: {nota_final}", 
                                     on_release=lambda x, aula_id=aula_id: self.open_subject_screen(aula_id))
             # Añade el item a la lista de subjects_list en el archivo kv
             self.ids.subjects_list.add_widget(item)
