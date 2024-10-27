@@ -1,3 +1,8 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+
 
 def Academic_Record_user_aula(user_id, aula_id):
     activities = pd.read_csv("./../../data/activitats.csv", encoding='ISO-8859-1')
@@ -12,8 +17,6 @@ def Academic_Record_user_aula(user_id, aula_id):
     return marks_user
 
 def Academic_Record(user_id):
-    import pandas as pd
-    import numpy as np
 
     activities = pd.read_csv("./../../data/activitats.csv", encoding='ISO-8859-1')
     marks = pd.read_csv("./../../data/notes.csv", delimiter=';')
@@ -38,7 +41,6 @@ def Academic_Record(user_id):
 
 
 def Academic_Record_Subject(user_id, aula_id):
-    import pandas as pd
     activities = pd.read_csv("./../../data/activitats.csv", encoding='ISO-8859-1')
     marks = pd.read_csv("./../../data/notes.csv", delimiter=';')
     submision = pd.read_csv("./../../data/trameses.csv")
@@ -55,9 +57,6 @@ def Academic_Record_Subject(user_id, aula_id):
 
 
 def pie_chart_submissions_user(user_id):
-    import pandas as pd
-    import matplotlib as plt
-    import numpy as np
     fontsize = 18
     submissions = pd.read_csv("./../../data/dataset.csv")
     submissions = submissions[['userid', 'aula_id', 'activitat', "activitat_id", 'datesubmitted', 'attempt_number', 'mark', 'count_activities']]
@@ -111,9 +110,6 @@ def pie_chart_submissions_user(user_id):
 
 
 def pie_chart_submissions_user_aula(user_id, aula_id):
-    import pandas as pd
-    import matplotlib as plt
-    import numpy as np
     fontsize = 18
     submissions = pd.read_csv("./../../data/dataset.csv")
     submissions = submissions[['userid', 'aula_id', 'activitat', "activitat_id", 'datesubmitted', 'attempt_number', 'mark', 'count_activities']]
@@ -167,8 +163,6 @@ def pie_chart_submissions_user_aula(user_id, aula_id):
 
 
 def stats_submitions(user_id, aula_id):
-    import pandas as pd
-    import numpy as np
     submissions =  pd.read_csv("./../../data/dataset.csv")
     submissions = submissions[['userid', 'aula_id', 'activitat',"activitat_id", 'datesubmitted', 'attempt_number', 'mark', 'count_activities']]
 
@@ -193,9 +187,6 @@ def stats_submitions(user_id, aula_id):
 
 
 def submition_temporal_graph(user_id, aula_id):
-    import numpy as np
-    import matplotlib.pyplot as plt
-    import matplotlib.dates as mdates
     fontsize = 18
 
 
@@ -238,8 +229,6 @@ def submition_temporal_graph(user_id, aula_id):
 
 
 def stats_Academic_Record_Mean_Marks(user_id):
-    import pandas as pd
-    import numpy as np
     submissions = pd.read_csv("./../../data/dataset.csv")
     submissions = submissions[['userid', 'aula_id', 'activitat', "activitat_id", 'datesubmitted', 'attempt_number', 'mark', 'count_activities']]
 
@@ -250,8 +239,6 @@ def stats_Academic_Record_Mean_Marks(user_id):
 
 
 def stats_Academic_Record_Mean_Final_Grade(user_id):
-    import pandas as pd
-    import numpy as np
     submissions = pd.read_csv("./../../data/dataset.csv")
     submissions = submissions[['userid', 'aula_id', 'F_Grade', 'R_Grade']].drop_duplicates()
     submissions
@@ -268,7 +255,6 @@ def stats_Academic_Record_Mean_Final_Grade(user_id):
 
 def ranking_user(user_id):
     
-    import pandas as pd
     submissions =  pd.read_csv("./../../data/dataset.csv")
     submissions_ranking = submissions[["userid", "Nota_Final"]]
     submissions_ranking = submissions_ranking.drop_duplicates()
