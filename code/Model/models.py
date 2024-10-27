@@ -82,12 +82,22 @@ def model_R_function(X, y, aula_id):
         print("This model hasn't been developed yet")
         return None
 
-def prediction_model(path_model, X_target):
-    model = joblib.load(path_model)
-    prediction = model.predict(X_target)
-    return prediction[0]
+def prediction_model(path_model_F, path_model_R, user_id, aula_id):
+    dataset = pd.read_csv('./../../data/dataset.csv')
+    dataset_model_141_F = model_F_dataset(dataset, 141)
+    dataset = pd.read_csv('./../../data/dataset.csv')
+    dataset_model_141_R = model_R_dataset(dataset, 141)
+    user_789_aula_141_F = dataset_model_141_F[(dataset_model_141_F["userid"] == user_id) & (dataset_model_141_F["aula_id"] == aula_id)][["P_Grade", "average_attempt_number"]].drop_duplicates()
+    user_789_aula_141_R = dataset_model_141_R[(dataset_model_141_R["userid"] == user_id) & (dataset_model_141_R["aula_id"] == aula_id)][["P_Grade", "F_Grade", "average_attempt_number"]].drop_duplicates()
+    model_F = joblib.load(path_model_F)
+    model_R = joblib.load(path_model_R)
+    prediction_F = model_F.predict(user_789_aula_141_F)
+    prediction_R = model_R.predict(user_789_aula_141_R)
 
-dataset = pd.read_csv('./../../data/dataset.csv')
+    return prediction_F[0], prediction_R[0]
+
+
+'''dataset = pd.read_csv('./../../data/dataset.csv')
 dataset_model_141_F = model_F_dataset(dataset, 141)
 model_141_F = model_F_function(dataset_model_141_F[["P_Grade", "average_attempt_number"]], dataset_model_141_F["F_Grade"], 141)
 
@@ -98,16 +108,20 @@ model_141_R = model_R_function(dataset_model_141_R[["P_Grade", "F_Grade", "avera
 user_789_aula_141_F = dataset_model_141_F[(dataset_model_141_F["userid"] == 789) & (dataset_model_141_F["aula_id"] == 141)][["P_Grade", "average_attempt_number"]].drop_duplicates()
 user_789_aula_141_R = dataset_model_141_R[(dataset_model_141_R["userid"] == 789) & (dataset_model_141_R["aula_id"] == 141)][["P_Grade", "F_Grade", "average_attempt_number"]].drop_duplicates()
 
-joblib.dump(model_141_F["model"], './../../data/models/model_141_P.pkl')
-joblib.dump(model_141_R["model"], './../../data/models/model_141_R.pkl')
+
 
 print(prediction_model('./../../data/models/model_141_P.pkl', user_789_aula_141_F))
 print(dataset[(dataset["userid"] == 789) & (dataset["aula_id"] == 141)][["F_Grade"]].drop_duplicates())
 
 print(prediction_model('./../../data/models/model_141_R.pkl', user_789_aula_141_R))
-print(dataset[(dataset["userid"] == 789) & (dataset["aula_id"] == 141)][["R_Grade"]].drop_duplicates())
+print(dataset[(dataset["userid"] == 789) & (dataset["aula_id"] == 141)][["R_Grade"]].drop_duplicates())'''
 
 '''
+
+joblib.dump(model_141_F["model"], './../../data/models/model_141_P.pkl')
+joblib.dump(model_141_R["model"], './../../data/models/model_141_R.pkl')
+
+
 OBRIR MODEL
 
 with open('modelo_entrenado.pkl', 'rb') as archivo:

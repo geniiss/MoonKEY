@@ -9,53 +9,92 @@
             spacing: dp(10)
             adaptive_height: True  # Adjust height based on content
 
-            # Title section
-            MDLabel:
-                text: "Estadístiques"
-                halign: "center"
-                font_style: "H5"
+            MDBoxLayout:
+                orientation: 'vertical'
+                spacing: dp(10)
                 size_hint_y: None
-                height: dp(40)
+                height: dp(100)
 
+
+                MDLabel:
+                    text: "Partial Grade:"
+                    halign: "center"
+                    font_style: "Body1"
+
+                MDLabel:
+                    id: partial_grade
+                    text: "3.3"
+                    halign: "center"
+                    font_style: "H6"
+            
             MDBoxLayout:
                 orientation: 'horizontal'
                 spacing: dp(10)
                 size_hint_y: None
                 height: dp(100)
 
+
                 # Column with grades
                 MDBoxLayout:
                     orientation: 'vertical'
                     spacing: dp(10)
-                    size_hint_x: 0.4
+                    size_hint_x: 0.5
 
                     MDLabel:
-                        text: "Nota Parcial:"
+                        text: "Final Grade:"
                         halign: "center"
                         font_style: "Body1"
 
                     MDLabel:
-                        id: partial_grade
+                        id: final_grade
                         text: "3.3"
                         halign: "center"
                         font_style: "H6"
 
                     MDLabel:
-                        text: "Nota Final Estimada:"
+                        text: "Recovery Grade:"
+                        halign: "center"
+                        font_style: "Body1"
+
+                    MDLabel:
+                        id: recovery_grade
+                        text: "13.3"
+                        halign: "center"
+                        font_style: "H6"
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    spacing: dp(10)
+                    size_hint_x: 0.5
+
+                    MDLabel:
+                        text: "Estimated Final Grade:"
                         halign: "center"
                         font_style: "Body1"
 
                     MDLabel:
                         id: estimated_final_grade
-                        text: "13.3"
+                        text: "0.0"
+                        halign: "center"
+                        font_style: "H6"
+                    
+
+                    MDLabel:
+                        text: "Estimated Recovery Grade:"
+                        halign: "center"
+                        font_style: "Body1"
+
+                    MDLabel:
+                        id: estimated_recovery_grade
+                        text: "0.0"
                         halign: "center"
                         font_style: "H6"
 
-                # Placeholder for pie chart
-                MDBoxLayout:
-                    id: pie_chart_box
-                    orientation: 'vertical'
-                    size_hint_x: 0.6
+            MDBoxLayout:
+                id: pie_chart_box
+                orientation: 'vertical'
+                size_hint_x: 0.6
+                    
 
             MDLabel:
                 text: "Nota d'Activitat Promig:"
