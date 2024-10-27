@@ -43,7 +43,7 @@ def Academic_Record_Subject(user_id, aula_id):
 
 def pie_chart_submissions_user(user_id):
     import pandas as pd
-    import matplotlib as plt
+    import matplotlib.pyplot as plt
     import numpy as np
     fontsize = 18
     submissions = pd.read_csv("./../../data/dataset.csv")
@@ -93,13 +93,9 @@ def pie_chart_submissions_user(user_id):
     return plt
 
 
-
-
-
-
 def pie_chart_submissions_user_aula(user_id, aula_id):
     import pandas as pd
-    import matplotlib as plt
+    import matplotlib.pyplot as plt
     import numpy as np
     fontsize = 18
     submissions = pd.read_csv("./../../data/dataset.csv")
@@ -182,7 +178,7 @@ def stats_submitions(user_id, aula_id):
 def submition_temporal_graph(user_id, aula_id):
     import pandas as pd
     import numpy as np
-    import matplotlib as plt
+    import matplotlib.pyplot as plt
     import matplotlib.dates as mdates
     fontsize = 18
 
