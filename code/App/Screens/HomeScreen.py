@@ -1,8 +1,15 @@
+import sys
+import os
 from kivy.uix.screenmanager import Screen
 from kivy.lang import Builder
 from kivy.properties import StringProperty, NumericProperty
 
 Builder.load_file("kv_files/HomeScreen.kv")
+
+from user_login import user_id
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'Model')))
+from Statistic_Tables import stats_Academic_Record_Mean_Final_Grade
+
 
 # Enum de las diferentes calificaciones posibles
 FAILED = 1
@@ -34,12 +41,7 @@ class HomeScreen(Screen):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.nota = 1
-        self.set_image(numeric_grade_to_grade(self.nota))
-
-    def incrementar_nota(self):
-        self.nota += 1
-        if self.nota > 10: self.nota = 1
+        self.nota = float(stats_Academic_Record_Mean_Final_Grade(user_id))
         self.set_image(numeric_grade_to_grade(self.nota))
 
     def set_image(self, nota):
