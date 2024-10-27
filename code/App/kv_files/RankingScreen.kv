@@ -1,26 +1,46 @@
 <RankingScreen>:
     name: "ranking"
+    
     MDBoxLayout:
         orientation: 'vertical'
-        
+
         MDTopAppBar:
             title: "Ranking"
             left_action_items: [["menu", lambda x: app.root.ids.nav_drawer.set_state("toggle")]]
         
-        # Imagen estática del mono
-        Image:
-            source: root.image_source
-            size_hint_y: 0.5
-            allow_stretch: True
-            keep_ratio: True
-        
-        # Texto estático debajo de la imagen
-        MDLabel:
-            text: root.image_text
-            halign: "center"
-            font_style: "H5"
-        
-        # Espaciador para evitar que el contenido se solape con la sombra de la barra de herramientas
+        # Espaciador superior para bajar el contenido
         Widget:
-            size_hint_y: None
-            height: "10dp"
+            size_hint_y: 0.2  # Ajusta este valor para controlar el espacio superior
+
+        # Contenedor para la imagen y el texto
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: 3  # Controla la altura total de la sección
+            spacing: "20dp"
+            padding: "20dp"
+            alignment: "center"
+
+            # Espaciador para bajar la imagen
+            Widget:
+                size_hint_y: 0  # Ajusta este valor para controlar cuánto espacio dejar arriba de la imagen
+            
+            # Etiqueta para mostrar el número obtenido
+            MDLabel:
+                text: root.image_text.split()[1]  # Muestra solo el número
+                halign: "center"
+                font_style: "H3"  # Cambia a H2 o H4 según prefieras
+                size_hint_y: None  # Permitir ajuste en altura
+                height: self.texture_size[1]  # Ajustar la altura del texto a su tamaño
+
+            # Imagen estática del mono
+            Image:
+                source: root.image_source
+                size_hint: 1, 1  # Expande la imagen a un tamaño grande
+                allow_stretch: True
+                keep_ratio: True
+
+            # Texto estático debajo de la imagen (puedes modificar esto si quieres que sea diferente)
+            MDLabel:
+                text: root.image_text  # Este texto se mantendrá igual, puedes modificarlo si quieres
+                halign: "center"
+                font_style: "H5"

@@ -1,11 +1,7 @@
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
-
-
-
 def Academic_Record(user_id):
+    import pandas as pd
+    import numpy as np
+
     activities = pd.read_csv("./../../data/activitats.csv", encoding='ISO-8859-1')
     marks = pd.read_csv("./../../data/notes.csv", delimiter=';')
     submision = pd.read_csv("./../../data/trameses.csv")
@@ -29,10 +25,11 @@ def Academic_Record(user_id):
 
 
 def Academic_Record_Subject(user_id, aula_id):
+    import pandas as pd
     activities = pd.read_csv("./../../data/activitats.csv", encoding='ISO-8859-1')
     marks = pd.read_csv("./../../data/notes.csv", delimiter=';')
     submision = pd.read_csv("./../../data/trameses.csv")
-    
+
     marks_user = marks[(marks["userid"] == user_id)]
 
     #Transforma los formatos de fecha UNIX
@@ -45,6 +42,9 @@ def Academic_Record_Subject(user_id, aula_id):
 
 
 def pie_chart_submissions_user(user_id):
+    import pandas as pd
+    import matplotlib as plt
+    import numpy as np
     fontsize = 18
     submissions = pd.read_csv("./../../data/dataset.csv")
     submissions = submissions[['userid', 'aula_id', 'activitat', "activitat_id", 'datesubmitted', 'attempt_number', 'mark', 'count_activities']]
@@ -98,6 +98,9 @@ def pie_chart_submissions_user(user_id):
 
 
 def pie_chart_submissions_user_aula(user_id, aula_id):
+    import pandas as pd
+    import matplotlib as plt
+    import numpy as np
     fontsize = 18
     submissions = pd.read_csv("./../../data/dataset.csv")
     submissions = submissions[['userid', 'aula_id', 'activitat', "activitat_id", 'datesubmitted', 'attempt_number', 'mark', 'count_activities']]
@@ -151,6 +154,8 @@ def pie_chart_submissions_user_aula(user_id, aula_id):
 
 
 def stats_submitions(user_id, aula_id):
+    import pandas as pd
+    import numpy as np
     submissions =  pd.read_csv("./../../data/dataset.csv")
     submissions = submissions[['userid', 'aula_id', 'activitat',"activitat_id", 'datesubmitted', 'attempt_number', 'mark', 'count_activities']]
 
@@ -175,6 +180,9 @@ def stats_submitions(user_id, aula_id):
 
 
 def submition_temporal_graph(user_id, aula_id):
+    import pandas as pd
+    import numpy as np
+    import matplotlib as plt
     import matplotlib.dates as mdates
     fontsize = 18
 
@@ -218,6 +226,8 @@ def submition_temporal_graph(user_id, aula_id):
 
 
 def stats_Academic_Record_Mean_Marks(user_id):
+    import pandas as pd
+    import numpy as np
     submissions = pd.read_csv("./../../data/dataset.csv")
     submissions = submissions[['userid', 'aula_id', 'activitat', "activitat_id", 'datesubmitted', 'attempt_number', 'mark', 'count_activities']]
 
@@ -228,6 +238,8 @@ def stats_Academic_Record_Mean_Marks(user_id):
 
 
 def stats_Academic_Record_Mean_Final_Grade(user_id):
+    import pandas as pd
+    import numpy as np
     submissions = pd.read_csv("./../../data/dataset.csv")
     submissions = submissions[['userid', 'aula_id', 'F_Grade', 'R_Grade']].drop_duplicates()
     submissions
@@ -240,3 +252,26 @@ def stats_Academic_Record_Mean_Final_Grade(user_id):
     submissions_user = submissions_user.dropna(subset=['Nota_Final'])
 
     return submissions_user["Nota_Final"].mean()
+
+
+def ranking_user(user_id):
+    
+    import pandas as pd
+    submissions =  pd.read_csv("./../../data/dataset.csv")
+    submissions_ranking = submissions[["userid", "Nota_Final"]]
+    submissions_ranking = submissions_ranking.drop_duplicates()
+    submissions_ranking['Nota_Final'] = submissions_ranking['Nota_Final'].str.replace(',', '.')
+    submissions_ranking['Nota_Final_Num'] = pd.to_numeric(submissions_ranking['Nota_Final'], errors='coerce')
+
+    submissions_ranking['Media_Nota_Final'] = submissions_ranking.groupby('userid')['Nota_Final_Num'].transform('mean')
+    submissions_ranking = submissions_ranking[["userid", "Media_Nota_Final"]]
+    submissions_ranking = submissions_ranking.drop_duplicates()
+
+    # Crear un nuevo campo 'Ranking'
+    submissions_ranking['Ranking'] = submissions_ranking['Media_Nota_Final'].rank(method='min', ascending=False)
+
+    submissions_ranking = submissions_ranking.drop_duplicates(subset=['userid', 'Media_Nota_Final', 'Ranking'])
+    ranking_user = submissions_ranking[submissions_ranking["userid"] == user_id]["Ranking"].values[0]
+
+
+    return int(ranking_user)
