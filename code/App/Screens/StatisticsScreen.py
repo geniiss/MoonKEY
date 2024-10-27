@@ -10,12 +10,12 @@ from kivymd.uix.datatables import MDDataTable
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from Screens.SubjectScreen import SubjectScreen
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'Model')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from user_login import user_id
 from pie_chart import pie_chart
 from Statistic_Tables import Academic_Record, stats_Academic_Record_Mean_Final_Grade, stats_Academic_Record_Mean_Marks
 
 Builder.load_file("kv_files/StatisticsScreen.kv")
-
-user_id = 789
 
 # Llista de codis d'assignatures
 academic_record = Academic_Record(user_id)
@@ -55,7 +55,7 @@ class StatisticsScreen(Screen):
     def populate_subjects_list(self):
     # Itera sobre cada asignatura en academic_record
         self.ids.subjects_list.clear_widgets()
-        for i in range(3):
+        for i in range(len(academic_record['aula_id'])):
             aula_id = academic_record['aula_id'].values[i]
             nota_final = academic_record['Nota_Final'].values[i]
             fecha_final = academic_record['Fecha_Final'].values[i]
