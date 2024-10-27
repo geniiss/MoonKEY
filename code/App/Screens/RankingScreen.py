@@ -7,7 +7,11 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'Model')))
 from Statistic_Tables import ranking_user
 
-Builder.load_file("kv_files/RankingScreen.kv")
+
+
+# Asegúrate de que el archivo kv existe en la carpeta kv_files
+Builder.load_file("kv_files/RankingScreen.kv") 
+
 class RankingScreen(Screen):
     user_id = 155  # Variable user_id hardcodeada
 
@@ -22,9 +26,11 @@ class RankingScreen(Screen):
     def update_ranking(self):
         # Obtiene el ranking del usuario y actualiza el texto
         ranking = ranking_user(self.user_id)  # Llama a la función ranking_user
-        self.image_text = f"You're #{ranking} among all students!! Congrats!!!"  # Actualiza el texto
+        ranking_number = ranking # Asegúrate de que el ranking no esté vacío
+        self.image_text = f"You're #{ranking_number} among all students!! Congrats!!!"  # Actualiza el texto
 
     def get_ranking_number(self):
         # Devuelve solo el número del ranking
         return self.image_text.split('#')[1].split()[0]  # Extrae solo el número
+
 
