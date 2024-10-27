@@ -9,12 +9,21 @@
             spacing: dp(10)
             adaptive_height: True  # Adjust height based on content
 
+            # Espaciador
+            Widget:
+                size_hint_y: None
+                height: "10dp"
+
             MDBoxLayout:
                 orientation: 'vertical'
                 spacing: dp(10)
                 size_hint_y: None
                 height: dp(100)
 
+
+                MDLabel:
+                    halign: "center"
+                    font_style: "Body1"
 
                 MDLabel:
                     text: "Partial Grade:"
@@ -90,33 +99,55 @@
                         halign: "center"
                         font_style: "H6"
 
+            MDLabel:
+                text: "Activities:"
+                halign: "center"
+                font_style: "H5"
+                size_hint_y: None
+                height: dp(40)
+
             MDBoxLayout:
-                id: pie_chart_box
-                orientation: 'vertical'
-                size_hint_x: 0.6
+                orientation: 'horizontal'
+                spacing: dp(10)
+                size_hint_y: None
+                height: dp(100)
+
+                MDBoxLayout:
+                    id: pie_chart_box
+                    orientation: 'vertical'
+                    size_hint_y: None
+                    size_hint_x: 0.6
+                    height: dp(100)
+
+                MDBoxLayout
+                    orientation: 'vertical'
+                    size_hint_x: 0.4
+                    spacing: dp(10)
+
+                    MDLabel:
+                        text: "Number of Activities:"
+                        halign: "center"
+                        font_style: "Body1"
+
+                    MDLabel:
+                        id: number_activities
+                        text: "0.0"
+                        halign: "center"
+                        font_style: "H6"
                     
 
-            MDLabel:
-                text: "Nota d'Activitat Promig:"
-                halign: "center"
-                font_style: "H5"
-                size_hint_y: None
-                height: dp(40)
+                    MDLabel:
+                        text: "Activity Average Grade:"
+                        halign: "center"
+                        font_style: "Body1"
+
+                    MDLabel:
+                        id: activity_average_grade
+                        text: "0.0"
+                        halign: "center"
+                        font_style: "H6"
 
             # Pie Chart Section (Activity grade average)
-            MDBoxLayout:
-                id: activity_chart_box
-                orientation: 'vertical'
-                size_hint_y: None
-                height: dp(200)
-
-            # Line chart for the activity grade history
-            MDLabel:
-                text: "Historial de Notes Finals"
-                halign: "center"
-                font_style: "H5"
-                size_hint_y: None
-                height: dp(40)
 
             MDBoxLayout:
                 id: line_chart_box
