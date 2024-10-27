@@ -11,8 +11,6 @@ from Screens.RankingScreen import RankingScreen
 from Screens.StatisticsScreen import StatisticsScreen
 from Screens.TrainingActivitiesScreen import TrainingActivitiesScreen
 
-LabelBase.register(name="NotoEmoji", fn_regular="../../image/fonts/NotoEmoji.ttf")
-
 Header = {
     "home": "MoonKEY",
     "ranking": "Ranking",
