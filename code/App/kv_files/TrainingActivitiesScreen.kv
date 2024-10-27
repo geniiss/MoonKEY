@@ -5,20 +5,20 @@
         MDTopAppBar:
             title: "Training Activities"
             left_action_items: [["menu", lambda x: app.root.ids.nav_drawer.set_state("toggle")]]
-        MDLabel:
-            text: "Training Activities Page"
-            halign: "center"
         Widget:
             size_hint_y: None
             height: "10dp"  # Ajusta la altura según el tamaño de la sombra
 
-        MDCard:
-            size_hint: None, None
-            size: "280dp", "100dp"
-            pos_hint: {"center_x": 0.5}
-            elevation: 10
-            padding: "10dp"
-            MDLabel:
-                text: root.card_text  # Se enlaza a la propiedad en Python
-                halign: "center"
-                theme_text_color: "Secondary"
+        MDScrollView:
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height  # Asegura que el contenedor ajuste su altura
+                padding: dp(10)
+
+                MDLabel:
+                    text: root.card_text  # Se enlaza a la propiedad en Python
+                    halign: "auto"
+                    theme_text_color: "Secondary"
+                    size_hint_y: None
+                    height: self.texture_size[1]  # Ajusta la altura del texto para el scroll
