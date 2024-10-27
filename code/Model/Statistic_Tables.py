@@ -1,3 +1,16 @@
+
+def Academic_Record_user_aula(user_id, aula_id):
+    activities = pd.read_csv("./../../data/activitats.csv", encoding='ISO-8859-1')
+    marks = pd.read_csv("./../../data/notes.csv", delimiter=';')
+    submision = pd.read_csv("./../../data/trameses.csv")
+
+    marks_user = marks[(marks["userid"] == user_id)]
+    marks_user = marks_user[marks_user["aula_id"] == aula_id]
+    marks_user = marks_user[["userid", "aula_id", "P_Grade", "F_Grade", "R_Grade"]]
+
+
+    return marks_user
+
 def Academic_Record(user_id):
     import pandas as pd
     import numpy as np
@@ -274,3 +287,6 @@ def ranking_user(user_id):
 
 
     return int(ranking_user)
+
+
+
