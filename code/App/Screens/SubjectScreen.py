@@ -18,40 +18,57 @@ Builder.load_file("kv_files/SubjectScreen.kv")
 class SubjectScreen(Screen):
     def __init__(self, aula_id, **kwargs):
         super(SubjectScreen, self).__init__(**kwargs)
-        self.aula_id = aula_id  # Emmagatzema l'aula_id com a atribut de la classe
+        self.aula_id = aula_id  # Store aula_id as a class attribute
 
     def on_enter(self, *args):
-        # Aquí podríem utilitzar self.aula_id per recuperar dades específiques d'aquesta assignatura
-        # Per exemple, carregar un gràfic o estadístiques basades en l'aula_id
+        # Update charts when the screen is displayed
         self.update_pie_chart()
         self.update_line_chart()
+        self.update_activity_chart()
 
     def update_pie_chart(self):
-        # Genera el gràfic circular amb matplotlib basat en l'aula_id
-        fig = pie_chart_submissions_user_aula(user_id, self.aula_id)  # Suposem que pie_chart() rep l'aula_id com a paràmetre
-        canvas = FigureCanvas(fig.gcf())
+        # Generate and display the main pie chart
+        fig = pie_chart_submissions_user_aula(user_id, self.aula_id)
+        canvas = FigureCanvas(fig)
         canvas.draw()
-
+        
         width, height = canvas.get_width_height()
         texture = Texture.create(size=(width, height), colorfmt='rgba')
         texture.blit_buffer(canvas.tostring_rgb(), colorfmt='rgb', bufferfmt='ubyte')
+        texture.flip_vertical()
 
         self.ids.pie_chart_box.clear_widgets()
-        
-        texture.flip_vertical()
         img = Image(texture=texture)
-
         self.ids.pie_chart_box.add_widget(img)
 
-    def update_line_chart(self):
-        # Genera el gràfic de línies basat en l'aula_id
-        fig = submition_temporal_graph(user_id, self.aula_id)  # Suposem que aquesta funció rep l'aula_id
-        canvas = FigureCanvas(fig.gcf())
+    def update_activity_chart(self):
+        # Generate a secondary pie chart for activity grades (mock data)
+        fig, ax = plt.subplots()
+        ax.pie([30, 40, 30], labels=["Activity 1", "Activity 2", "Activity 3"], autopct='%1.1f%%')
+        
+        canvas = FigureCanvas(fig)
         canvas.draw()
+
         width, height = canvas.get_width_height()
         texture = Texture.create(size=(width, height), colorfmt='rgba')
         texture.blit_buffer(canvas.tostring_rgb(), colorfmt='rgb', bufferfmt='ubyte')
         texture.flip_vertical()
+
+        self.ids.activity_chart_box.clear_widgets()
+        img = Image(texture=texture)
+        self.ids.activity_chart_box.add_widget(img)
+
+    def update_line_chart(self):
+        # Generate and display the line chart
+        fig = submition_temporal_graph(user_id, self.aula_id)
+        canvas = FigureCanvas(fig)
+        canvas.draw()
+        
+        width, height = canvas.get_width_height()
+        texture = Texture.create(size=(width, height), colorfmt='rgba')
+        texture.blit_buffer(canvas.tostring_rgb(), colorfmt='rgb', bufferfmt='ubyte')
+        texture.flip_vertical()
+
         self.ids.line_chart_box.clear_widgets()
         img = Image(texture=texture)
         self.ids.line_chart_box.add_widget(img)

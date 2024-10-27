@@ -1,68 +1,92 @@
 <SubjectScreen>:
-    MDBoxLayout:
-        orientation: 'vertical'
-        
-
-        # Secció per mostrar les estadístiques de l'assignatura
-        MDBoxLayout:
-            orientation: 'horizontal'
-            padding: dp(10)
-            spacing: dp(10)
-            size_hint_y: None
-            height: dp(200)
-            
-            # Labels per a les mitjanes
-            MDBoxLayout:
-                orientation: 'vertical'
-                size_hint_x: 0.4
-                padding: dp(10)
-                
-                MDLabel:
-                    text: "Nota Final Promig:"
-                    halign: "center"
-                    font_style: "Body1"
-                
-                MDLabel:
-                    id: final_grade_avg
-                    text: "0.0"
-                    halign: "center"
-                    font_style: "H6"
-                
-                MDLabel:
-                    text: "Nota d'Activitat Promig:"
-                    halign: "center"
-                    font_style: "Body1"
-                
-                MDLabel:
-                    id: activity_grade_avg
-                    text: "0.0"
-                    halign: "center"
-                    font_style: "H6"
-
-            # Espai per a la gràfica circular (Pie Chart)
-            MDBoxLayout:
-                id: pie_chart_box
-                orientation: 'vertical'
-                size_hint_x: 0.6
-                padding: dp(10)
-
-        # Gràfic de línies per la mitjana de les notes finals
-        MDLabel:
-            text: "Historial de Notes Finals"
-            halign: "center"
-            font_style: "H5"
-            size_hint_y: None
-            height: dp(40)
+    ScrollView:
+        do_scroll_x: False  # Only allow vertical scrolling
+        do_scroll_y: True
 
         MDBoxLayout:
-            id: line_chart_box
             orientation: 'vertical'
             padding: dp(10)
-            size_hint_y: None
-            height: dp(200)
-        
-        # Botó per tornar enrere (opcional, si no es vol usar la icona de la barra superior)
-        MDRaisedButton:
-            text: "Torna a les Estadístiques"
-            pos_hint: {"center_x": 0.5}
-            on_release: root.manager.current = "statistics"
+            spacing: dp(10)
+            adaptive_height: True  # Adjust height based on content
+
+            # Title section
+            MDLabel:
+                text: "Estadístiques"
+                halign: "center"
+                font_style: "H5"
+                size_hint_y: None
+                height: dp(40)
+
+            MDBoxLayout:
+                orientation: 'horizontal'
+                spacing: dp(10)
+                size_hint_y: None
+                height: dp(100)
+
+                # Column with grades
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    spacing: dp(10)
+                    size_hint_x: 0.4
+
+                    MDLabel:
+                        text: "Nota Parcial:"
+                        halign: "center"
+                        font_style: "Body1"
+
+                    MDLabel:
+                        id: partial_grade
+                        text: "3.3"
+                        halign: "center"
+                        font_style: "H6"
+
+                    MDLabel:
+                        text: "Nota Final Estimada:"
+                        halign: "center"
+                        font_style: "Body1"
+
+                    MDLabel:
+                        id: estimated_final_grade
+                        text: "13.3"
+                        halign: "center"
+                        font_style: "H6"
+
+                # Placeholder for pie chart
+                MDBoxLayout:
+                    id: pie_chart_box
+                    orientation: 'vertical'
+                    size_hint_x: 0.6
+
+            MDLabel:
+                text: "Nota d'Activitat Promig:"
+                halign: "center"
+                font_style: "H5"
+                size_hint_y: None
+                height: dp(40)
+
+            # Pie Chart Section (Activity grade average)
+            MDBoxLayout:
+                id: activity_chart_box
+                orientation: 'vertical'
+                size_hint_y: None
+                height: dp(200)
+
+            # Line chart for the activity grade history
+            MDLabel:
+                text: "Historial de Notes Finals"
+                halign: "center"
+                font_style: "H5"
+                size_hint_y: None
+                height: dp(40)
+
+            MDBoxLayout:
+                id: line_chart_box
+                orientation: 'vertical'
+                size_hint_y: None
+                height: dp(200)
+
+            # Return Button
+            MDRaisedButton:
+                text: "Torna a les Estadístiques"
+                pos_hint: {"center_x": 0.5}
+                on_release: root.manager.current = "statistics"
