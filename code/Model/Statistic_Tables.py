@@ -43,7 +43,7 @@ def Academic_Record_Subject(user_id, aula_id):
 
 def pie_chart_submissions_user(user_id):
     import pandas as pd
-    import matplotlib.pyplot as plt
+    import matplotlib as plt
     import numpy as np
     fontsize = 18
     submissions = pd.read_csv("./../../data/dataset.csv")
@@ -93,9 +93,13 @@ def pie_chart_submissions_user(user_id):
     return plt
 
 
+
+
+
+
 def pie_chart_submissions_user_aula(user_id, aula_id):
     import pandas as pd
-    import matplotlib.pyplot as plt
+    import matplotlib as plt
     import numpy as np
     fontsize = 18
     submissions = pd.read_csv("./../../data/dataset.csv")
@@ -176,11 +180,12 @@ def stats_submitions(user_id, aula_id):
 
 
 def submition_temporal_graph(user_id, aula_id):
-    import pandas as pd
     import numpy as np
     import matplotlib.pyplot as plt
     import matplotlib.dates as mdates
     fontsize = 18
+
+
 
     submissions =  pd.read_csv("./../../data/dataset.csv")
     submissions = submissions[['userid', 'aula_id', 'activitat',"activitat_id", 'datesubmitted', 'attempt_number', 'mark', 'count_activities']]
@@ -191,33 +196,31 @@ def submition_temporal_graph(user_id, aula_id):
 
     # Convertir la columna 'datesubmitted' a formato de fecha (sin horas)
     submissions_user['datesubmitted'] = pd.to_datetime(submissions_user['datesubmitted']).dt.date
-
     # Agrupar por 'datesubmitted' y sumar los valores de 'attempt_number'
     submissions_agrupado = submissions_user.groupby('datesubmitted', as_index=False)['attempt_number'].sum()
+    submissions_agrupado
+
+
 
     # Crear el gráfico
     plt.figure(figsize=(10, 5))
     plt.plot(submissions_agrupado['datesubmitted'], submissions_agrupado['attempt_number'], marker='o', linestyle='-', color='#c09268', linewidth=3)
-
-    # Personalizar el gráfico para un estilo minimalista
-
-    plt.xlabel('', fontsize=fontsize)
-    plt.ylabel('Submitions', fontsize=fontsize)
-    plt.xticks(rotation=45, fontsize = fontsize)
-    plt.yticks(np.arange(0, submissions_agrupado['attempt_number'].max() + 1, 5), fontsize= fontsize)
-
-    # Formato de la fecha en el eje X
-    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%d-%m-%y'))
-
-    # Ocultar bordes no deseados
     plt.gca().spines['top'].set_visible(False)
     plt.gca().spines['right'].set_visible(False)
     plt.gca().spines['left'].set_visible(True)
     plt.gca().spines['bottom'].set_visible(True)
-
-        # Ajustar y mostrar el gráfico
-    plt.tight_layout()
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%d-%m-%y'))
+    # Personalizar el gráfico para un estilo minimalista
+    if(submissions_agrupado.shape[0] != 0):
+        plt.xlabel('', fontsize=fontsize)
+        plt.ylabel('Submitions', fontsize=fontsize)
+        plt.xticks(rotation=45, fontsize = fontsize)
+        plt.yticks(np.arange(0, submissions_agrupado['attempt_number'].max() + 1, 5), fontsize= fontsize)
+            # Ajustar y mostrar el gráfico
+        plt.tight_layout()
+    plt.plot
     return plt
+
 
 
 
