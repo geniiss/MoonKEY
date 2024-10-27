@@ -6,14 +6,14 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'Model')))
 from Statistic_Tables import ranking_user
-
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from user_login import user_id
 
 
 # Asegúrate de que el archivo kv existe en la carpeta kv_files
 Builder.load_file("kv_files/RankingScreen.kv") 
 
-class RankingScreen(Screen):
-    user_id = 155  # Variable user_id hardcodeada
+class RankingScreen(Screen):  # Variable user_id hardcodeada
 
     # Define propiedades para la fuente de la imagen y el texto
     image_source = StringProperty("../../image/monkeys/ranking.png")  # Imagen inicial estática
@@ -25,7 +25,7 @@ class RankingScreen(Screen):
 
     def update_ranking(self):
         # Obtiene el ranking del usuario y actualiza el texto
-        ranking = ranking_user(self.user_id)  # Llama a la función ranking_user
+        ranking = ranking_user(user_id)  # Llama a la función ranking_user
         ranking_number = ranking # Asegúrate de que el ranking no esté vacío
         self.image_text = f"You're #{ranking_number} among all students!! Congrats!!!"  # Actualiza el texto
 
