@@ -1,7 +1,8 @@
 import openai
 import pandas as pd
+from api_key import KEY
 
-openai.api_key = "sk-2XANZD8_XcvOI1xXNFMViVVAP576EzQEKOKr99JM9QT3BlbkFJaDgjE2Grw_RlZXUGBe0rSVKo0-WzP96MTiwJGGP9QA"
+openai.api_key = KEY
 
 def reinforcment_advice(dataset, user_id):
     dataset = dataset[dataset["userid"] == user_id]

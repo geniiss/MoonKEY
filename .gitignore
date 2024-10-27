@@ -2,5 +2,6 @@
 /code/App/__pycache__
 /code/App/Screens/__pycache__
 /code/Model/__pycache__
+/code/Model/api_key.py
 /.buildozer
 /bin
