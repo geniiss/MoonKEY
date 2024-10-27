@@ -69,7 +69,7 @@ class StatisticsScreen(Screen):
 
     def open_subject_screen(self, code):
         # Obre una nova pantalla per a l'assignatura seleccionada
-        subject_screen = SubjectScreen(name=f"subject_{code}")
+        subject_screen = SubjectScreen(aula_id=code, name=f"subject_{code}")
         subject_screen.subject_code = str(code)
         self.manager.add_widget(subject_screen)
         self.manager.current = subject_screen.name
